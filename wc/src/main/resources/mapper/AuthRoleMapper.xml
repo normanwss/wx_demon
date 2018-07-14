@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wc.mapper.AuthRoleMapper">
+    <sql id="Base_Column_List">
+    role_id, business_id, parent_id, role_name, enabled, is_store, is_store_multiple, 
+    remark, del_flag, created_time, updated_time
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.example.wc.model.AuthRole">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_role
+        where role_id = #{roleId}
+    </select>
+
+    <select id="selectAll" resultType="com.example.wc.model.AuthRole">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_role
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from auth_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.example.wc.model.AuthRole">
+    insert into auth_role (role_id, business_id, parent_id, 
+      role_name, enabled, is_store, 
+      is_store_multiple, remark, del_flag, 
+      created_time, updated_time)
+    values (#{roleId,jdbcType=VARCHAR}, #{businessId,jdbcType=INTEGER}, #{parentId,jdbcType=VARCHAR}, 
+      #{roleName,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{isStore,jdbcType=BIT}, 
+      #{isStoreMultiple,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=BIT}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.wc.model.AuthRole">
+        insert into auth_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="businessId != null">
+                business_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="enabled != null">
+                enabled,
+            </if>
+            <if test="isStore != null">
+                is_store,
+            </if>
+            <if test="isStoreMultiple != null">
+                is_store_multiple,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="businessId != null">
+                #{businessId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                #{enabled,jdbcType=BIT},
+            </if>
+            <if test="isStore != null">
+                #{isStore,jdbcType=BIT},
+            </if>
+            <if test="isStoreMultiple != null">
+                #{isStoreMultiple,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.wc.model.AuthRole">
+        update auth_role
+        <set>
+            <if test="businessId != null">
+                business_id = #{businessId,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="enabled != null">
+                enabled = #{enabled,jdbcType=BIT},
+            </if>
+            <if test="isStore != null">
+                is_store = #{isStore,jdbcType=BIT},
+            </if>
+            <if test="isStoreMultiple != null">
+                is_store_multiple = #{isStoreMultiple,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.wc.model.AuthRole">
+    update auth_role
+    set business_id = #{businessId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      is_store = #{isStore,jdbcType=BIT},
+      is_store_multiple = #{isStoreMultiple,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=BIT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>
